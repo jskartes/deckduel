@@ -17,7 +17,7 @@ export const getFriends = () => {
 }
 
 export const addFriend = friend => {
-  sendRequest('/api/users/add-friend');
+  return sendRequest('/api/users/add-friend', 'POST', friend);
 }
 
 export const getAllUsers = () => {

@@ -202,6 +202,7 @@ $border-radius: 4px;
     flex-direction: column;
     height: 100%;
     margin-right: 10px;
+    max-height: calc(100vh - 20px);
 
     .nav-button {
       background-color: $panel-overlay-background-color;
@@ -218,20 +219,40 @@ $border-radius: 4px;
       border-radius: $border-radius;
       display: flex;
       flex-direction: column;
+      font-size: 1.75vmin;
       height: 20vmin;
       justify-content: flex-start;
       margin: 1vmin auto 2vmin;
       padding: 0.5vmin 0;
       width: 97.5%;
 
-      span {@include flex-center;}
+      > span {@include flex-center;}
 
       .friends-list {
+        align-items: center;
         border-top: 1px solid $window-background-color;
+        display: flex;
         flex: auto;
+        flex-direction: column;
+        justify-content: flex-start;
         margin: 0.5vmin auto;
         overflow-y: auto;
         width: 100%;
+
+        div {
+          background-color: $panel-background-color;
+          border-radius: $border-radius;
+          margin-top: 0.75vmin;
+          text-align: center;
+          width: 80%;
+
+          .online {
+            color: $online-indicator-color;
+            margin-right: 0.5vmin;
+          }    
+
+          &:hover {@include hover;}
+        }
       }
     }
 
@@ -248,6 +269,7 @@ $border-radius: 4px;
       display: flex;
       flex: auto;
       flex-direction: column;
+      font-size: 1.75vmin;
       overflow-y: auto;
 
       .chat-title {
@@ -267,7 +289,7 @@ $border-radius: 4px;
         width: 100%;
 
         .nav-button {
-          font-size: 1.75vmin;
+          font-size: inherit;
           margin: 0 0.2vmin;
           padding: unset;
           padding-top: 0.15vmin;
@@ -280,6 +302,7 @@ $border-radius: 4px;
         display: flex;
         flex-direction: column;
         flex: auto;
+        font-size: inherit;
         justify-content: flex-end;
         overflow-y: auto;
         width: 100%;

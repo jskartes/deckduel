@@ -50,9 +50,13 @@ const getFriends = async (req, res) => {
 
 const addFriend = async (req, res) => {
   const user = await User.findOne({username: req.user.username});
+  const friend = await User.findById(req.body._id);
   user.friends.push(req.body);
   await user.save();
-  res.json('Friend added successfully');
+  friend.friends.push(req.user);
+  await friend.save();
+  await user.populate('friends');
+  res.json(user.friends);
 }
 
 const getAllUsers = async (req, res) => {

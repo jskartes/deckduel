@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import ActiveChat from './ActiveChat';
 import UserFriends from './UserFriends';
 import * as usersAPI from '../utilities/usersAPI';
@@ -7,8 +8,19 @@ const Chat = ({ user,
                 initiateChat,
                 endChat,
                 activeChat }) => {
-  const addFriend = friend => {
-    usersAPI.addFriend(friend);
+  const [friends, setFriends] = useState([]);
+
+  useEffect(() => {
+    const getFriends = async () => {
+      const friends = await usersAPI.getFriends();
+      setFriends(friends);
+    }
+    getFriends();
+  }, []);
+
+  const addFriend = async friend => {
+    const updatedFriends = await usersAPI.addFriend(friend);
+    setFriends(updatedFriends);
   }
 
   return (
@@ -17,7 +29,7 @@ const Chat = ({ user,
         Search Users
       </div>
 
-      <UserFriends initiateChat={initiateChat} />
+      <UserFriends friends={friends} initiateChat={initiateChat} />
 
       {activeChat ?
       <ActiveChat
