@@ -4,6 +4,7 @@ $font-weight-normal: 400;
 $font-weight-bold: 700;
 
 /*----- COLORS -----*/
+$embedded-form-background-color: #111;
 $error-color: red;
 $font-color: #bbb;
 $highlight-color: yellow;
@@ -30,6 +31,14 @@ $border-radius: 4px;
   border-radius: $border-radius;
 }
 
+@mixin embedded-form {
+  background-color: $embedded-form-background-color;
+  border: none;
+  border-radius: $border-radius;
+  color: inherit;
+  font-family: inherit;
+}
+
 @mixin hover {
   background-color: $highlight-color;
   color: $panel-background-color;
@@ -39,6 +48,8 @@ $border-radius: 4px;
   background-color: $modal-background-color;
   border: 1px solid $font-color;
   border-radius: $border-radius;
+
+  .modal-title {font-size: 4vmin;}
 }
 
 * {
@@ -56,6 +67,15 @@ $border-radius: 4px;
   height: 100vh;
 
   .blur {filter: blur(8px);}
+
+  .inset-text {
+    @include flex-center;
+    color: $panel-overlay-background-color;
+    flex: auto;
+    flex-direction: column;
+    font-size: 5vmin;
+    font-weight: $font-weight-bold;
+  }  
 
   > div {height: 100%;}
 
@@ -203,6 +223,16 @@ $border-radius: 4px;
       margin: 1vmin auto;
       padding: 0.5vmin 0;
       width: 97.5%;
+
+      span {@include flex-center;}
+
+      .friends-list {
+        border-top: 1px solid $window-background-color;
+        flex: auto;
+        margin: 0.5vmin auto;
+        overflow-y: auto;
+        width: 100%;
+      }
     }
 
     .inactive {
@@ -255,7 +285,7 @@ $border-radius: 4px;
   }
 }
 
-.UserSearch {
+.App > .UserSearch {
   @include modal;
   @include flex-center;
   flex-direction: column;
@@ -265,4 +295,59 @@ $border-radius: 4px;
   top: 50%;
   transform: translate(-50%, -50%);
   width: 60vmin;
+
+  .user-list {
+    display: flex;
+    flex: auto;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 2vmin 0;
+    overflow-y: auto;
+
+    .username {
+      background-color: $panel-overlay-background-color;
+      border-radius: $border-radius;
+      cursor: pointer;
+      font-size: 2vmin;
+      margin: 0.5vmin 2vmin;
+      text-align: center;
+      transition: 0.1s ease-in-out;
+      width: 30vmin;
+
+      .online {
+        color: $online-indicator-color;
+        margin-right: 0.5vmin;
+      }
+
+      &:hover {@include hover;}
+    }
+  }
+
+  .user-search {
+    display: grid;
+    grid-template-columns: 85% 15%;
+    height: auto;
+    padding: 0.5vmin;
+    width: 100%;
+
+    input, button {
+      @include embedded-form;
+      font-size: 1.85vmin;
+    }
+
+    input {
+      cursor: text;
+      margin-right: 0.5vmin;
+      padding-left: 1vmin;
+
+      &:focus {outline: none;}
+    }
+
+    button {
+      cursor: pointer;
+      transition: 0.1s ease-in-out;
+
+      &:hover {@include hover;}
+    }
+  }
 }

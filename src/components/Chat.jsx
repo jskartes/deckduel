@@ -15,7 +15,7 @@ const Chat = ({ user,
 
     {activeChat ?
     <ActiveChat user={user} activeChat={activeChat} endChat={endChat} /> :
-    <div className='inactive'>
+    <div className='inset-text'>
       <span>No</span><span>Active</span><span>Chat</span>
     </div>}
   </div>

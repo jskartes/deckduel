@@ -39,7 +39,17 @@ const logoutUser = async (req, res) => {
   res.status(200);
 }
 
+const getAllUsers = async (req, res) => {
+  const allUsers = await (
+    User.find({username: {$nin: [req.user.username]}})
+        .collation({locale: 'en', strength: 1})
+        .sort({username: 'asc'})
+  );
+  res.json(allUsers);
+}
+
 module.exports = {
+  getAllUsers,
   loginUser,
   logoutUser,
   registerUser

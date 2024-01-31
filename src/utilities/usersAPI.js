@@ -17,5 +17,5 @@ export const getFriends = () => {
 }
 
 export const getAllUsers = () => {
-
+  return sendRequest('/api/users/');
 }

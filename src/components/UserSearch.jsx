@@ -21,7 +21,7 @@ const UserSearch = ({ handleCancel, initiateChat }) => {
 
   return (
     <div className='UserSearch'>
-      <span>User Search</span>
+      <span className='modal-title'>User Search</span>
 
       <div className='user-list'>
         {filteredUsers.length ?
@@ -35,7 +35,7 @@ const UserSearch = ({ handleCancel, initiateChat }) => {
             {user.username}
           </span>
         )) :
-        <div className='no-users'>
+        <div className='inset-text'>
           <span>No</span><span>Users</span><span>Found</span>
         </div>}
       </div>
