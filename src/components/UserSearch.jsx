@@ -28,7 +28,7 @@ const UserSearch = ({ handleCancel, initiateChat }) => {
         filteredUsers.map((user, i) => (
           <span
             className='username'
-            key={index}
+            key={i}
             onClick={() => initiateChat(user)}
           >
             {user.isOnline && <span className='online'>&#9679;</span>}
