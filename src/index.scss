@@ -1,0 +1,37 @@
+/*----- FONTS -----*/
+$font: 'Skranji';
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+
+/*----- COLORS -----*/
+$lightgray: #ccc;
+$window-background-color: black;
+
+@mixin flex-center {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+* {
+  box-sizing: border-box;
+  cursor: default;
+  margin: 0;
+  overscroll-behavior: none;
+}
+
+.App {
+  background-color: $window-background-color;
+  color: $lightgray;
+  font-family: $font;
+  height: 100vh;
+
+  > div {
+    height: 100%;
+  }
+}
+
+.Splash, .UserRegistration, .UserLogin {
+  @include flex-center;
+  flex-direction: column;
+}
