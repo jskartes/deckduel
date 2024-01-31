@@ -4,13 +4,13 @@ import * as usersAPI from '../utilities/usersAPI';
 const UserFriends = ({ initiateChat }) => {
   const [friends, setFriends] = useState([]);
 
-  useEffect(() => {
-    const getFriends = async () => {
-      const friends = await usersAPI.getFriends();
-      setFriends(friends);
-    }
-    getFriends();
-  }, []);
+  // useEffect(() => {
+  //   const getFriends = async () => {
+  //     const friends = await usersAPI.getFriends();
+  //     setFriends(friends);
+  //   }
+  //   getFriends();
+  // }, []);
 
   return (
     <div className='UserFriends'>
