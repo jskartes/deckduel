@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import * as usersService from '../utilities/usersService';
 import * as chatsAPI from '../utilities/chatsAPI';
 import * as socket from '../utilities/socket';
+import Card from '../components/Card';
 import Chat from '../components/Chat';
 import UserPageNav from '../components/UserPageNav';
 import UserSearch from '../components/UserSearch';
@@ -65,6 +66,7 @@ const UserPage = ({ user, setUser }) => {
 
       <div className='main-content'>
         <UserPageNav user={user} handleLogout={handleLogout} />
+        <Card />
       </div>
 
       {pageStatus.showUserSearch && createPortal(

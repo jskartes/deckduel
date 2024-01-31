@@ -3,7 +3,13 @@ const Chat = require('../models/chat');
 let io;
 
 const init = server => {
-  io = require('socket.io')(server, {cors: {origin: 'http://localhost:3000'}});
+  if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+    io = require('socket.io')(
+      server, {cors: {origin: 'http://localhost:3000'}}
+    );
+  } else {
+    io = require('socket.io')(server);
+  }
 
   io.sockets.on('connection', socket => {
     console.log(`User connected (socket ${socket.id})`);
