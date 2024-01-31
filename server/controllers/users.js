@@ -36,7 +36,23 @@ const logoutUser = async (req, res) => {
   const user = await User.findOne({username: req.user.username});
   user.isOnline = false;
   await user.save();
-  res.status(200);
+  res.json('Logout successful');
+}
+
+const getFriends = async (req, res) => {
+  const user = await (
+    User.findOne({username: req.user.username})
+        .populate('friends')
+        .exec()
+  );
+  res.json(user.friends);
+}
+
+const addFriend = async (req, res) => {
+  const user = await User.findOne({username: req.user.username});
+  user.friends.push(req.body);
+  await user.save();
+  res.json('Friend added successfully');
 }
 
 const getAllUsers = async (req, res) => {
@@ -49,7 +65,9 @@ const getAllUsers = async (req, res) => {
 }
 
 module.exports = {
+  addFriend,
   getAllUsers,
+  getFriends,
   loginUser,
   logoutUser,
   registerUser

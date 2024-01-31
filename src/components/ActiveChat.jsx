@@ -1,21 +1,20 @@
-import { useState, useEffect } from 'react';
-import * as chatsAPI from '../utilities/chatsAPI';
+import { useState, useEffect, useRef } from 'react';
+import * as socket from '../utilities/socket';
 
-const ActiveChat = ({ user, activeChat, endChat }) => {
-  const [messageHistory, setMessageHistory] = useState([]);
+const ActiveChat = ({ user, activeChat, endChat, addFriend }) => {
   const [newMessage, setNewMessage] = useState('');
-
+  
   useEffect(() => {
-    const getMessageHistory = async () => {
-      const messages = await chatsAPI.getMessageHistory(activeChat);
-      setMessageHistory(messages);
-    }
-    getMessageHistory();
+    socket.joinChat(activeChat._id);
   }, []);
 
   const handleChange = event => setNewMessage(event.target.value);
 
-  const sendMessage = () => {}
+  const sendMessage = event => {
+    event.preventDefault();
+    socket.sendMessage(activeChat._id, user, newMessage);
+    setNewMessage('');
+  }
 
   const chatWith = activeChat.players.find(player => {
     return player.username !== user.username
@@ -28,7 +27,7 @@ const ActiveChat = ({ user, activeChat, endChat }) => {
       </span>
 
       <div className='chat-actions'>
-        <div className='nav-button' onClick={() => {}}>
+        <div className='nav-button' onClick={() => addFriend(chatWith)}>
           Add as Friend
         </div>
         <div className='nav-button' onClick={endChat}>
@@ -37,7 +36,7 @@ const ActiveChat = ({ user, activeChat, endChat }) => {
       </div>
 
       <div className='message-window'>
-        {messageHistory.map((message, i) => (
+        {activeChat.messages.map((message, i) => (
           <div
             key={i}
             className={`message ${

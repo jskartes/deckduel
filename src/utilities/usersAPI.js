@@ -13,7 +13,11 @@ export const logoutUser = () => {
 }
 
 export const getFriends = () => {
-  
+  return sendRequest('/api/users/get-friends');
+}
+
+export const addFriend = friend => {
+  sendRequest('/api/users/add-friend');
 }
 
 export const getAllUsers = () => {

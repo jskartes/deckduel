@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import * as usersService from '../utilities/usersService';
 import * as chatsAPI from '../utilities/chatsAPI';
+import * as socket from '../utilities/socket';
 import Chat from '../components/Chat';
 import UserPageNav from '../components/UserPageNav';
 import UserSearch from '../components/UserSearch';
@@ -13,8 +14,28 @@ const UserPage = ({ user, setUser }) => {
     error: ''
   });
 
-  const initiateChat = withUser => {
+  useEffect(() => {
+    socket.registerUpdateChat(updateChat);
+  }, [user]);
 
+  const initiateChat = async withUser => {
+    try {
+      const chat = await chatsAPI.initiateChat(withUser);
+      setPageStatus({
+        ...pageStatus,
+        showUserSearch: false,
+        activeChat: chat
+      });
+    } catch {
+      setPageStatus({
+        ...pageStatus,
+        error: 'Chat initiation failed'
+      });
+    }
+  }
+
+  function updateChat(chat) {
+    setPageStatus({...pageStatus, activeChat: chat});
   }
 
   const endChat = () => setPageStatus({...pageStatus, activeChat: null});
