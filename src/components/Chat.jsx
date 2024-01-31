@@ -23,13 +23,22 @@ const Chat = ({ user,
     setFriends(updatedFriends);
   }
 
+  const unfriend = async friend => {
+    const updatedFriends = await usersAPI.unfriend(friend);
+    setFriends(updatedFriends);
+  }
+
   return (
     <div className='Chat'>
       <div className='nav-button' onClick={toggleShowUserSearch}>
         Search Users
       </div>
 
-      <UserFriends friends={friends} initiateChat={initiateChat} />
+      <UserFriends
+        friends={friends}
+        initiateChat={initiateChat}
+        unfriend={unfriend}
+      />
 
       {activeChat ?
       <ActiveChat

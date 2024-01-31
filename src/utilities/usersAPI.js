@@ -20,6 +20,10 @@ export const addFriend = friend => {
   return sendRequest('/api/users/add-friend', 'POST', friend);
 }
 
+export const unfriend = friend => {
+  return sendRequest('/api/users/unfriend', 'POST', friend);
+}
+
 export const getAllUsers = () => {
   return sendRequest('/api/users/');
 }

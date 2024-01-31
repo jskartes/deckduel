@@ -239,19 +239,35 @@ $border-radius: 4px;
         overflow-y: auto;
         width: 100%;
 
-        div {
-          background-color: $panel-background-color;
-          border-radius: $border-radius;
+        .friend {
+          display: flex;
+          justify-content: space-between;
           margin-top: 0.75vmin;
-          text-align: center;
           width: 80%;
 
-          .online {
-            color: $online-indicator-color;
-            margin-right: 0.5vmin;
-          }    
+          > div {
+            background-color: $panel-background-color;
+            border-radius: $border-radius;
+            text-align: center;
 
-          &:hover {@include hover;}
+            &:hover {@include hover;}
+          }
+
+          .name {
+            flex: auto;
+            margin-right: 0.75vmin;
+
+            .online {
+              color: $online-indicator-color;
+              margin-right: 0.5vmin;
+            }
+          }
+
+          .unfriend {
+            padding: 0 1vmin;
+
+            &:hover {background-color: $error-color;}
+          }
         }
       }
     }

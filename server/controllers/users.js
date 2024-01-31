@@ -59,6 +59,19 @@ const addFriend = async (req, res) => {
   res.json(user.friends);
 }
 
+const unfriend = async (req, res) => {
+  const user = await User.findOne({username: req.user.username});
+  const friend = await User.findById(req.body._id);
+  const i = user.friends.indexOf(friend._id);
+  user.friends.splice(i, 1);
+  await user.save();
+  const j = friend.friends.indexOf(req.user._id);
+  friend.friends.splice(j, 1);
+  await friend.save();
+  await user.populate('friends');
+  res.json(user.friends);
+}
+
 const getAllUsers = async (req, res) => {
   const allUsers = await (
     User.find({username: {$nin: [req.user.username]}})
@@ -74,5 +87,6 @@ module.exports = {
   getFriends,
   loginUser,
   logoutUser,
-  registerUser
+  registerUser,
+  unfriend
 }
