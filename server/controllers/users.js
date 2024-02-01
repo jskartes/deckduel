@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const Card = require('../models/card');
 
 const createJWT = user => {
   return jwt.sign({user}, process.env.SECRET, {expiresIn: '24h'});
@@ -9,6 +10,17 @@ const createJWT = user => {
 const registerUser = async (req, res) => {
   try {
     const user = await User.create(req.body);
+
+    const cards = await (
+      Card.aggregate()
+          .match({name: {$nin: ['Mana']}})
+          .sample(10)
+    );
+    for (const card of cards) {
+      user.userCollection.cards.push(card);
+    }
+    await user.save();
+
     res.json(user);
   } catch (error) {
     res.status(400).json(error);
@@ -81,9 +93,16 @@ const getAllUsers = async (req, res) => {
   res.json(allUsers);
 }
 
+const getCards = async (req, res) => {
+  const user = await User.findOne({username: req.user.username});
+  await user.populate('userCollection.cards');
+  res.json(user.userCollection.cards);
+}
+
 module.exports = {
   addFriend,
   getAllUsers,
+  getCards,
   getFriends,
   loginUser,
   logoutUser,

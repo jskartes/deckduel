@@ -491,6 +491,15 @@ $border-radius: 4px;
       @include panel;
       padding-top: 1.5vmin;
     }
+
+    .CardCollection {
+      .collection {
+        display: grid;
+        row-gap: 2vmin;
+        grid-template-columns: repeat(5, 1fr);
+        margin: 4vmin 0 0 2vmin;
+      }
+    }
   }
 }
 
@@ -574,7 +583,6 @@ $border-radius: 4px;
   display: flex;
   flex-direction: column;
   height: 30vmin;
-  margin: 2vmin;
   transition: 0.25s ease-in-out;
   user-select: none;
 

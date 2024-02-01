@@ -8,5 +8,6 @@ router.get('/get-friends', usersController.getFriends);
 router.post('/add-friend', usersController.addFriend);
 router.post('/unfriend', usersController.unfriend);
 router.get('/logout', usersController.logoutUser);
+router.get('/cards', usersController.getCards);
 
 module.exports = router;

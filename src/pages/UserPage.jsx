@@ -102,7 +102,7 @@ const UserPage = ({ user, setUser }) => {
         </div>}
 
         {pageStatus.mainContent === 'collection' &&
-        <CardCollection nav={nav} />}
+        <CardCollection user={user} nav={nav} />}
 
         {pageStatus.mainContent === 'games' &&
         <UserGames nav={nav} />}

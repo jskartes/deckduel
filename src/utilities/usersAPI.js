@@ -27,3 +27,7 @@ export const unfriend = friend => {
 export const getAllUsers = () => {
   return sendRequest('/api/users/');
 }
+
+export const getCards = () => {
+  return sendRequest('/api/users/cards');
+}

@@ -53,7 +53,10 @@ const userSchema = new Schema({
     type: Number,
     default: 0
   },
-  userCollection: userCollectionSchema
+  userCollection: {
+    type: userCollectionSchema,
+    default: () => ({})
+  }
 }, {
   timestamps: true
 });
