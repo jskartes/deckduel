@@ -4,11 +4,17 @@ $font-weight-normal: 400;
 $font-weight-bold: 700;
 
 /*----- COLORS -----*/
+$card-background-color: #6c624a;
+$card-border-color: white;
+$card-cost-icon-color: rgb(0, 168, 0);
+$card-defense-color: rgb(145, 145, 211);
+$card-strength-color: rgb(255, 100, 100);
+$card-text-color: white;
 $embedded-form-background-color: #111;
 $error-color: red;
 $font-color: #bbb;
 $highlight-color: yellow;
-$modal-background-color: rgba(255, 255, 255, 0.15);
+$modal-background-color: #222c;
 $online-indicator-color: lightgreen;
 $panel-background-color: #222;
 $panel-overlay-background-color: #333;
@@ -66,7 +72,7 @@ $border-radius: 4px;
   font-family: $font;
   height: 100vh;
 
-  .blur {filter: blur(8px);}
+  .blur {filter: blur(12px);}
 
   .inset-text {
     @include flex-center;
@@ -372,35 +378,118 @@ $border-radius: 4px;
     }
   }
 
-  .UserPageNav {
-    @include panel;
-    align-items: center;
-    display: flex;
-    font-size: 2vmin;
-    height: 6vmin;
-    justify-content: space-between;
-    padding: 0 2vmin;
-    width: 100%;
+  .main-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 6vmin 1fr;
+    row-gap: 10px;
 
-    .username {
-      color: $highlight-color;
-      font-size: 2.25vmin;
-      font-weight: $font-weight-bold;
-      margin-right: 0.3vmin;
+    .UserPageNav, .UserPageNav + div nav {
+      display: flex;
+      font-size: 2vmin;
+      justify-content: space-between;
+      padding: 0 2vmin;
+      width: 100%;
+  
+      .nav-links span {
+        border-right: 1px solid $panel-overlay-background-color;
+        cursor: pointer;
+        padding: 0.5vmin 2vmin;
+        transition: 0.1s ease-in-out;
+  
+        &:last-of-type {
+          border-right: none;
+          padding-right: 0;
+        }
+  
+        &:hover {color: $highlight-color;}
+      }
     }
 
-    .nav-links span {
-      border-right: 1px solid $panel-overlay-background-color;
-      cursor: pointer;
-      padding: 0.5vmin 2vmin;
+    .UserPageNav {
+      @include panel;
+      align-items: center;
+
+      .username {
+        color: $highlight-color;
+        font-size: 2.25vmin;
+        font-weight: $font-weight-bold;
+        margin-right: 0.3vmin;
+      }
+    }
+    
+    .UserPageNav + div {
+      height: 100%;
+
+      nav {
+        align-items: start;
+
+        > span {
+          font-size: 6vmin;
+          font-weight: $font-weight-bold;
+        }
+      }
+    }
+
+    .nav-panels {
+      display: grid;
+      grid-template-columns: 1fr;
+      row-gap: 10px;
+    }
+
+    .NavPanel {
+      @include panel;
+      display: grid;
+      grid-template-columns: 25% 75%;
       transition: 0.1s ease-in-out;
 
-      &:last-of-type {
-        border-right: none;
-        padding-right: 0;
+      * {cursor: pointer;}
+
+      &:hover {
+        background-color: $panel-overlay-background-color;
+
+        .nav-panel-text span {color: $highlight-color;}
       }
 
-      &:hover {color: $highlight-color;}
+      .nav-panel-image {
+        @include flex-center;
+
+        .nav-panel-image-container {
+          @include flex-center;
+          height: 80%;
+          width: 80%;
+
+          span {
+            color: $panel-background-color;
+            font-size: 9.25vmin;
+            font-weight: $font-weight-bold;
+            text-shadow: 4px 2px 5px white;
+            transform: rotate(20deg)
+          }
+        }
+      }
+
+      .nav-panel-text {
+        @include flex-center;
+        flex: auto;
+        flex-direction: column;
+
+        span {
+          font-size: 5vmin;
+          font-weight: $font-weight-bold;
+          margin-bottom: 3vmin;
+        }
+
+        p {
+          font-size: 2vmin;
+          text-align: center;
+        }
+      }
+    }
+
+    .CardCollection, .UserGames, .LearnToPlay {
+      @include panel;
+      padding-top: 1.5vmin;
     }
   }
 }
@@ -472,41 +561,54 @@ $border-radius: 4px;
   }
 }
 
+.card-container {
+  display: flex;
+}
+
 .Card {
   aspect-ratio: 5 / 7;
-  border: 0.5px solid white;
+  background-color: $card-background-color;
+  border: 1.5px solid $card-border-color;
   border-radius: $border-radius;
-  color: white;
+  color: $card-text-color;
   display: flex;
   flex-direction: column;
   height: 30vmin;
-  margin: 4vmin;
+  margin: 2vmin;
   transition: 0.25s ease-in-out;
   user-select: none;
 
   * {cursor: pointer;}
 
-  // &:active {transform: rotate(90deg);}
+  &:active {
+    transform: rotate(90deg);
+  }
 
   .card-top {
     align-items: center;
-    border-bottom: 0.5px solid white;
+    border-bottom: 0.5px solid $card-border-color;
     display: flex;
     justify-content: space-between;
     padding: 0.375vmin 0.75vmin;
 
     .card-name{
       font-size: 1.5vmin;
+      font-weight: $font-weight-bold;
     }
 
-    .card-cost{
+    .card-cost, .card-cost.mana {
       @include flex-center;
       aspect-ratio: 1 / 1;
-      background-color: green;
+      background-color: $card-cost-icon-color;
       border-radius: 50%;
       font-size: 2vmin;
       font-weight: $font-weight-bold;
       height: 2.5vmin;
+      padding-top: 0.2vmin;
+    }
+
+    .card-cost.mana {
+      background-color: transparent;
     }
   }
 
@@ -519,38 +621,56 @@ $border-radius: 4px;
   }
 
   .card-type {
-    border-bottom: 0.5px solid white;
-    border-top: 0.5px solid white;
+    border-bottom: 0.5px solid $card-border-color;
+    border-top: 0.5px solid $card-border-color;
     font-size: 1vmin;
     padding: 0.075vmin 0.4vmin;
   }
 
+  .card-text.mana {
+    @include flex-center;
+    margin: auto;
+    text-align: center;
+    width: 50%;
+  }
+  
   .card-text {
     flex: auto;
     font-size: 1.3vmin;
     padding: 0.6vmin 0.4vmin 0.4vmin;
     position: relative;
+    text-align: center;
 
     .str-def {
-
+      @include flex-center;
       bottom: 0.5vmin;
       font-size: 2vmin;
       position: absolute;
       right: 0.4vmin;
 
       .str, .def {
+        @include flex-center;
         font-weight: $font-weight-bold;
+
+        img {
+          height: 1.75vmin;
+          opacity: 0.75;
+        }
       }
 
       .str {
-        border-right: 0.5px solid white;
-        color: rgb(255, 100, 100);
+        border-right: 0.5px solid $card-border-color;
+        color: $card-strength-color;
         padding-right: 0.75vmin;
+
+        img {margin-right: 0.5vmin;}
       }
 
       .def {
-        color: rgb(100, 100, 255);
+        color: $card-defense-color;
         padding: 0 0.5vmin 0 0.75vmin;
+
+        img {margin-left: 0.5vmin;}
       }
     }
   }
