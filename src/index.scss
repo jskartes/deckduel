@@ -476,9 +476,17 @@ $border-radius: 4px;
   aspect-ratio: 5 / 7;
   border: 0.5px solid white;
   border-radius: $border-radius;
+  color: white;
   display: flex;
   flex-direction: column;
   height: 30vmin;
+  margin: 4vmin;
+  transition: 0.25s ease-in-out;
+  user-select: none;
+
+  * {cursor: pointer;}
+
+  // &:active {transform: rotate(90deg);}
 
   .card-top {
     align-items: center;
@@ -504,6 +512,8 @@ $border-radius: 4px;
 
   .card-art {
     img {
+      height: 100%;
+      -webkit-user-drag: none;
       width: 100%;
     }
   }
@@ -517,21 +527,30 @@ $border-radius: 4px;
 
   .card-text {
     flex: auto;
+    font-size: 1.3vmin;
+    padding: 0.6vmin 0.4vmin 0.4vmin;
     position: relative;
 
     .str-def {
 
-      bottom: 0.4vmin;
+      bottom: 0.5vmin;
       font-size: 2vmin;
       position: absolute;
       right: 0.4vmin;
 
       .str, .def {
-        padding: 0 0.5vmin;
+        font-weight: $font-weight-bold;
       }
 
       .str {
         border-right: 0.5px solid white;
+        color: rgb(255, 100, 100);
+        padding-right: 0.75vmin;
+      }
+
+      .def {
+        color: rgb(100, 100, 255);
+        padding: 0 0.5vmin 0 0.75vmin;
       }
     }
   }

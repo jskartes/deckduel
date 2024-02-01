@@ -1,6 +1,8 @@
 const Card = () => {
+  
+
   return (
-    <div className='Card'>
+    <div id='Card' className='Card'>
       <div className='card-top'>
         <div className='card-name'>Militant Monk</div>
         <div className='card-cost'>3</div>
@@ -16,6 +18,7 @@ const Card = () => {
       <div className='card-type'>Character</div>
       
       <div className='card-text'>
+        This card has no specific rules text.
         <div className='str-def'>
           <span className='str'>3</span>
           <span className='def'>3</span>
