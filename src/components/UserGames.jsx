@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const UserGames = ({ nav }) => {
   return (
     <div className='UserGames'>
@@ -9,6 +11,8 @@ const UserGames = ({ nav }) => {
           <span onClick={() => nav('learnToPlay')}>Learn to Play</span>
         </div>
       </nav>
+      
+      <Link to='/game'>Play a game</Link>
     </div>
   );
 }

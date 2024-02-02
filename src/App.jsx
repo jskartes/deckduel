@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { getUser } from './utilities/usersService';
+import Game from './pages/Game';
 import Splash from './pages/Splash';
 import UserLogin from './pages/UserLogin';
 import UserPage from './pages/UserPage';
@@ -17,6 +18,10 @@ const App = () => {
           <Route
             path={`/${user.username}`}
             element={<UserPage user={user} setUser={setUser} />}
+          />
+          <Route
+            path='/game'
+            element={<Game />}
           />
           <Route
             path='/*'

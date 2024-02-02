@@ -8,7 +8,7 @@ const Card = ({ name,
                 text,
                 strength,
                 defense }) => (
-  <div className='Card'>
+  <div className='Card' draggable='true'>
     <div className='card-top'>
       <div className='card-name'>{name}</div>
       <div className={`card-cost ${!cost && 'mana'}`}>

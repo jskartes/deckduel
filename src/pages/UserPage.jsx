@@ -15,7 +15,7 @@ const UserPage = ({ user, setUser }) => {
   const [showUserSearch, setShowUserSearch] = useState(false);
   const [activeChat, setActiveChat] = useState(null);
   const [mainContent, setMainContent] = useState('navPanels');
-  const [errror, setError] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     socket.registerUpdateChat(updateChat);
