@@ -490,12 +490,14 @@ $border-radius: 4px;
     .CardCollection {
       .collection {
         display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
         margin: 4vmin 0 0 2vmin;
         max-width: 128vmin;
-        overflow-x: auto;
+        overflow-y: auto;
 
         .Card {
-          margin-right: 1vmin;
+          margin: 0 1vmin 1vmin 0;
         }
       }
     }
