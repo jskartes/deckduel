@@ -254,6 +254,7 @@ $border-radius: 4px;
           > div {
             background-color: $panel-background-color;
             border-radius: $border-radius;
+            cursor: pointer;
             text-align: center;
 
             &:hover {@include hover;}
@@ -494,10 +495,14 @@ $border-radius: 4px;
 
     .CardCollection {
       .collection {
-        display: grid;
-        row-gap: 2vmin;
-        grid-template-columns: repeat(5, 1fr);
+        display: flex;
         margin: 4vmin 0 0 2vmin;
+        max-width: 128vmin;
+        overflow-x: auto;
+
+        .Card {
+          margin-right: 1vmin;
+        }
       }
     }
   }
@@ -570,10 +575,6 @@ $border-radius: 4px;
   }
 }
 
-.card-container {
-  display: flex;
-}
-
 .Card {
   aspect-ratio: 5 / 7;
   background-color: $card-background-color;
@@ -587,10 +588,6 @@ $border-radius: 4px;
   user-select: none;
 
   * {cursor: pointer;}
-
-  &:active {
-    transform: rotate(90deg);
-  }
 
   .card-top {
     align-items: center;

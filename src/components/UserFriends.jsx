@@ -11,7 +11,7 @@ const UserFriends = ({ friends, initiateChat, unfriend }) => {
               {friend.username}
             </div>
             <div className='unfriend' onClick={() => unfriend(friend)}>
-              X
+              &times;
             </div>
           </div>
         ))}

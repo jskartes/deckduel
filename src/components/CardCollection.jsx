@@ -8,7 +8,6 @@ const CardCollection = ({ user, nav }) => {
   useEffect(() => {
     const getCards = async () => {
       const cards = await usersAPI.getCards();
-      console.log(cards);
       setCards(cards);
     }
     getCards();
@@ -26,8 +25,9 @@ const CardCollection = ({ user, nav }) => {
       </nav>
 
       <div className='collection'>
-        {cards.map(card => (
+        {cards.map((card, i) => (
           <Card
+            key={i}
             name={card.name}
             cost={card.cost}
             art={card.art}

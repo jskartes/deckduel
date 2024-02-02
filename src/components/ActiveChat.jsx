@@ -8,22 +8,24 @@ const ActiveChat = ({ user, activeChat, endChat, addFriend }) => {
     socket.joinChat(activeChat._id);
   }, []);
 
+  const chatWith = activeChat.players.find(player => {
+    return player.username !== user.username
+  });
+
+  const username = useRef(chatWith.username);
+
   const handleChange = event => setNewMessage(event.target.value);
 
   const sendMessage = event => {
     event.preventDefault();
     socket.sendMessage(activeChat._id, user, newMessage);
     setNewMessage('');
-  }
-
-  const chatWith = activeChat.players.find(player => {
-    return player.username !== user.username
-  });
+  }  
 
   return (
     <div className='ActiveChat'>
       <span className='chat-title'>
-        Chat with <span>{chatWith.username}</span>
+        Chat with <span>{username.current}</span>
       </span>
 
       <div className='chat-actions'>

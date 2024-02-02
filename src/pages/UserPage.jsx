@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import * as usersService from '../utilities/usersService';
@@ -13,49 +12,36 @@ import UserPageNav from '../components/UserPageNav';
 import UserSearch from '../components/UserSearch';
 
 const UserPage = ({ user, setUser }) => {
-  const [pageStatus, setPageStatus] = useState({
-    showUserSearch: false,
-    activeChat: null,
-    mainContent: 'navPanels',
-    error: ''
-  });
+  const [showUserSearch, setShowUserSearch] = useState(false);
+  const [activeChat, setActiveChat] = useState(null);
+  const [mainContent, setMainContent] = useState('navPanels');
+  const [errror, setError] = useState('');
 
   useEffect(() => {
     socket.registerUpdateChat(updateChat);
   }, [user]);
 
-  const nav = content => {
-    setPageStatus({
-      ...pageStatus,
-      mainContent: content
-    });
-  }
+  const nav = content => setMainContent(content);
 
   const initiateChat = async withUser => {
     try {
       const chat = await chatsAPI.initiateChat(withUser);
-      setPageStatus({
-        ...pageStatus,
-        showUserSearch: false,
-        activeChat: chat
-      });
+      setActiveChat(chat);
+      setShowUserSearch(false);
     } catch {
-      setPageStatus({
-        ...pageStatus,
-        error: 'Chat initiation failed'
-      });
+      setError('Chat initiation failed');
     }
   }
 
   function updateChat(chat) {
-    setPageStatus({...pageStatus, activeChat: chat});
+    setActiveChat(chat);
   }
 
-  const endChat = () => setPageStatus({...pageStatus, activeChat: null});
+  const endChat = () => setActiveChat(null);
 
   const toggleShowUserSearch = () => {
-    const currentShowUserSearch = pageStatus.showUserSearch;
-    setPageStatus({...pageStatus, showUserSearch: !currentShowUserSearch});
+    const currentShowUserSearch = showUserSearch;
+    setShowUserSearch(!currentShowUserSearch);
   }
 
   const handleLogout = () => {
@@ -64,7 +50,7 @@ const UserPage = ({ user, setUser }) => {
   }
 
   // CSS class on page component when UserSearch portal is showing
-  const blur = pageStatus.showUserSearch ? 'blur' : '';
+  const blur = showUserSearch ? 'blur' : '';
   
   return (
     <div className={`UserPage ${blur}`}>
@@ -73,13 +59,13 @@ const UserPage = ({ user, setUser }) => {
         toggleShowUserSearch={toggleShowUserSearch}
         initiateChat={initiateChat}
         endChat={endChat}
-        activeChat={pageStatus.activeChat}
+        activeChat={activeChat}
       />
 
       <div className='main-content'>
         <UserPageNav user={user} handleLogout={handleLogout} />
 
-        {pageStatus.mainContent === 'navPanels' &&
+        {mainContent === 'navPanels' &&
         <div className='nav-panels'>
           <NavPanel
             nav={nav} to='collection'
@@ -101,17 +87,17 @@ const UserPage = ({ user, setUser }) => {
           />
         </div>}
 
-        {pageStatus.mainContent === 'collection' &&
+        {mainContent === 'collection' &&
         <CardCollection user={user} nav={nav} />}
 
-        {pageStatus.mainContent === 'games' &&
+        {mainContent === 'games' &&
         <UserGames nav={nav} />}
 
-        {pageStatus.mainContent === 'learnToPlay' &&
+        {mainContent === 'learnToPlay' &&
         <LearnToPlay nav={nav} />}
       </div>
 
-      {pageStatus.showUserSearch && createPortal(
+      {showUserSearch && createPortal(
         <UserSearch
           handleCancel={toggleShowUserSearch}
           initiateChat={initiateChat}
