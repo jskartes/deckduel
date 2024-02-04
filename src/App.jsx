@@ -23,7 +23,7 @@ const App = () => {
             }
           />
           <Route
-            path='/game'
+            path={`/game/${game?._id.slice(-6)}`}
             element={<Game game={game} setGame={setGame} />}
           />
           <Route

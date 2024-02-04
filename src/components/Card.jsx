@@ -1,6 +1,3 @@
-import { useState, useEffect } from 'react';
-import * as cardsAPI from '../utilities/cardsAPI';
-
 const Card = ({ name,
                 cost,
                 art,
@@ -8,7 +5,7 @@ const Card = ({ name,
                 text,
                 strength,
                 defense }) => (
-  <div className='Card' draggable='true'>
+  <div className='Card'>
     <div className='card-top'>
       <div className='card-name'>{name}</div>
       <div className={`card-cost ${!cost && 'mana'}`}>

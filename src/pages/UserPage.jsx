@@ -91,7 +91,7 @@ const UserPage = ({ user, setUser, setGame }) => {
         <CardCollection user={user} nav={nav} />}
 
         {mainContent === 'games' &&
-        <UserGames nav={nav} setGame={setGame} />}
+        <UserGames nav={nav} user={user} setGame={setGame} />}
 
         {mainContent === 'learnToPlay' &&
         <LearnToPlay nav={nav} />}

@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import * as usersAPI from '../utilities/usersAPI';
 import * as gamesAPI from '../utilities/gamesAPI';
 
-const UserGames = ({ nav, setGame }) => {
+const UserGames = ({ nav, user, setGame }) => {
+  const [userGames, setUserGames] = useState([]);
   const [onlineUsers, setOnlineUsers] = useState([]);
 
   const navigate = useNavigate();
@@ -17,10 +18,18 @@ const UserGames = ({ nav, setGame }) => {
     getAllUsers();
   }, []);
 
+  useEffect(() => {
+    const getAllGames = async () => {
+      const allGames = await gamesAPI.getAllGames();
+      setUserGames(allGames);
+    }
+    getAllGames();
+  }, []);
+
   const handleCreateGame = async withUser => {
     const game = await gamesAPI.createGame(withUser);
     setGame(game);
-    navigate('/game');
+    navigate(`/game/${game._id.slice(-6)}`);
   }
 
   return (
@@ -35,7 +44,22 @@ const UserGames = ({ nav, setGame }) => {
       </nav>
 
       <div className='game-screen'>
-        <div className='game-history'></div>
+        <div className='game-history'>
+          {userGames.map((game, i) => {
+            const opp = game.players.filter(player => (
+              player.player._id !== user._id
+            ))[0];
+            return (
+              <div key={i}>
+                Game {game._id.slice(-6)} vs. <span>{opp.player.username}</span>
+                &nbsp;&mdash;&nbsp;
+                {game.isInProgress ? 'In Progress' : 'Completed'}
+                {game.isInProgress &&
+                <div className='nav-button'>Resume</div>}
+              </div>
+            );
+          })}
+        </div>
 
         <div className='start-game'>
           <span>Start a Game</span>

@@ -1,6 +1,19 @@
 const Game = require('../models/game');
 const Card = require('../models/card');
 
+const getAllGames = async (req, res) => {
+  try {
+    const games = await (
+      Game.find({'players.player': req.user})
+          .populate('players.player')
+          .exec()
+    );
+    res.json(games);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+}
+
 const createGame = async (req, res) => {
   try {
     const game = await Game.create({
@@ -38,5 +51,6 @@ const createGame = async (req, res) => {
 }
 
 module.exports = {
-  createGame
+  createGame,
+  getAllGames
 }
