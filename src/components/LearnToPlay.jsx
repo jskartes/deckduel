@@ -8,6 +8,10 @@ const LearnToPlay = ({ nav }) => (
         <span onClick={() => nav('games')}>Your Games</span>
       </div>
     </nav>
+
+    <div>
+      Coming Soon...
+    </div>
   </div>
 );
 

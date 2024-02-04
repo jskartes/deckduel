@@ -564,6 +564,15 @@ $border-radius: 4px;
         }
       }
     }
+
+    .LearnToPlay {
+      > div {
+        @include flex-center;
+        color: $panel-overlay-background-color;
+        font-size: 12vmin;
+        height: 100%;
+      }
+    }
   }
 }
 

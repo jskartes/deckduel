@@ -196,6 +196,8 @@ const Game = ({ game, setGame }) => {
       {showGameChat &&
       // <Chat />}
       <div className='game-chat'></div>}
+
+      <audio src='/music-assets/game_theme.mp3' autoPlay={true} loop={true} />
     </div>
   );
 }
