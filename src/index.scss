@@ -5,7 +5,7 @@ $font-weight-bold: 700;
 
 /*----- COLORS -----*/
 $card-background-color: #6c624a;
-$card-border-color: white;
+$card-border-color: #bbb;
 $card-cost-icon-color: rgb(0, 168, 0);
 $card-defense-color: rgb(145, 145, 211);
 $card-strength-color: rgb(255, 100, 100);
@@ -758,13 +758,31 @@ $border-radius: 4px;
         .player-health {
           border: 1px solid $panel-overlay-background-color;
           border-radius: 50%;
-          font-size: 8vmin;
-          padding: 0 5vmin;
+          font-size: 6vmin;
+          text-align: center;
+          width: 60%;
+        }
+
+        .opponent-discard, .user-discard {
+          background-color: $panel-overlay-background-color;
+          border-radius: $border-radius;
+          display: flex;
+          flex: auto;
+          flex-direction: column;
+          margin: 1vmin;
+          width: 95%;
+
+          span {
+            border-bottom: 1px solid $panel-background-color;
+            color: $panel-background-color;
+            font-size: 1.75vmin;
+            text-align: center;
+          }
         }
       }
 
       .opponent-data {
-        border-bottom: 3px solid $panel-overlay-background-color;
+        border-bottom: 5px double $panel-overlay-background-color;
         justify-content: flex-start;
       }
 
