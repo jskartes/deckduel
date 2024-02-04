@@ -52,9 +52,9 @@ const Game = ({ game, setGame }) => {
       const reorderedCards = [
         ...gameState.players[0].zones[source.droppableId].cards
       ];
-      const swapCard = reorderedCards[source.index];
-      reorderedCards[source.index] = reorderedCards[destination.index];
-      reorderedCards[destination.index] = swapCard;
+      const chosenCard = {...reorderedCards[source.index]};
+      reorderedCards.splice(source.index, 1);
+      reorderedCards.splice(destination.index, 0, chosenCard);
       setGameState(prev => {
         const newGameState = JSON.parse(JSON.stringify(prev));
         newGameState.players[0].zones[source.droppableId].cards = reorderedCards;

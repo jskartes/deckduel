@@ -105,7 +105,7 @@ const UserPage = ({ user, setUser, setGame }) => {
         document.getElementById('App')
       )}
 
-      <audio src='/music-assets/menu_theme.mp3' autoPlay={true} loop={true} />
+      <audio src='/music-assets/title_theme.mp3' autoPlay={true} loop={true} />
     </div>
   );
 }

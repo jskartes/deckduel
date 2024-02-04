@@ -11,8 +11,6 @@ const Splash = () => (
       <Link className='nav-button' to='/register'>Register</Link>
       <Link className='nav-button' to='/login'>Log In</Link>
     </div>
-
-    <audio src='/music-assets/title_theme.mp3' autoPlay={true} />
   </div>
 );
 
