@@ -501,6 +501,44 @@ $border-radius: 4px;
         }
       }
     }
+
+    .UserGames {
+      .game-screen {
+        display: grid;
+        grid-template-columns: 75% 25%;
+        height: 100%;
+
+        .game-history {
+          border-right: 1px solid $panel-overlay-background-color;
+        }
+
+        .start-game {
+          align-items: center;
+          display: flex;
+          flex-direction: column;
+
+          > span {
+            font-size: 4vmin;
+            font-weight: $font-weight-bold;
+          }
+
+          .online-players {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            margin-top: 2vmin;
+            width: 100%;
+
+            span {
+              border-bottom: 1px solid $panel-overlay-background-color;
+              font-size: 2vmin;
+              text-align: center;
+              width: 60%;
+            }
+          }
+        }
+      }
+    }
   }
 }
 
@@ -686,9 +724,11 @@ $border-radius: 4px;
 
   > div {@include panel;}
 
+  .Card {transform: scale(0.9);}
+
   .game-window {
     display: grid;
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 16% 84%;
 
     .left {
       border-right: 3px solid $panel-overlay-background-color;
@@ -700,14 +740,15 @@ $border-radius: 4px;
 
       > div {
         border-bottom: 1px solid $panel-overlay-background-color;
+        display: flex;
         height: 100%;
 
         &:last-of-type {border-bottom: none;}
       }
 
-      #opponent-in-play {background-color: rgb(40, 0, 0);}
+      .opponent-in-play {background-color: #221414;}
 
-      #user-in-play {background-color: rgb(0, 0, 40);}
+      .user-in-play {background-color: #141422;}
     }
   }
 }

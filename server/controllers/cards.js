@@ -1,8 +1,8 @@
 const Card = require('../models/card');
 
-const getCards = async (req, res) => {
+const getSplashCards = async (req, res) => {
   try {
-    const cards = await Card.aggregate().sample(5);
+    const cards = await Card.aggregate().sample(8);
     res.json(cards);
   } catch (error) {
     res.status(400).json(error);
@@ -10,5 +10,5 @@ const getCards = async (req, res) => {
 }
 
 module.exports = {
-  getCards
+  getSplashCards
 }

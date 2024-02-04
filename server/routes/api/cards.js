@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const cardsController = require('../../controllers/cards');
 
-router.get('/', cardsController.getCards);
+router.get('/splash', cardsController.getSplashCards);
 
 module.exports = router;

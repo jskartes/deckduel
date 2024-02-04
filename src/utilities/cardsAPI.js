@@ -1,5 +1,5 @@
 import sendRequest from "./sendRequest";
 
-export const getCards = () => {
-  return sendRequest('/api/cards');
+export const getSplashCards = () => {
+  return sendRequest('/api/cards/splash');
 }

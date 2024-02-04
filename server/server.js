@@ -18,6 +18,7 @@ app.use(require('./config/checkToken'));
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/chats', require('./routes/api/chats'));
 app.use('/api/cards', require('./routes/api/cards'));
+app.use('/api/games', require('./routes/api/games'));
 
 app.get('/*', (req, res) => {
   res.sendFile(resolve(dirname(__filename), '../build', 'index.html'));
