@@ -9,6 +9,7 @@ import UserRegistration from './pages/UserRegistration';
 
 const App = () => {
   const [user, setUser] = useState(getUser());
+  const [game, setGame] = useState(null);
 
   return (
     <div id='App' className='App'>
@@ -17,11 +18,13 @@ const App = () => {
         <>
           <Route
             path={`/${user.username}`}
-            element={<UserPage user={user} setUser={setUser} />}
+            element={
+              <UserPage user={user} setUser={setUser} setGame={setGame} />
+            }
           />
           <Route
             path='/game'
-            element={<Game />}
+            element={<Game game={game} setGame={setGame} />}
           />
           <Route
             path='/*'

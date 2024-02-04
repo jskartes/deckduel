@@ -518,6 +518,7 @@ $border-radius: 4px;
           flex-direction: column;
 
           > span {
+            color: $highlight-color;
             font-size: 4vmin;
             font-weight: $font-weight-bold;
           }
@@ -534,6 +535,12 @@ $border-radius: 4px;
               font-size: 2vmin;
               text-align: center;
               width: 60%;
+            }
+
+            div {
+              font-size: 2.5vmin;
+              margin-top: 1vmin;
+              padding: 0 3vmin;
             }
           }
         }
@@ -731,7 +738,37 @@ $border-radius: 4px;
     grid-template-columns: 16% 84%;
 
     .left {
+      align-items: center;
       border-right: 3px solid $panel-overlay-background-color;
+      display: flex;
+      flex-direction: column;
+
+      .opponent-data, .user-data {
+        @include flex-center;
+        flex-direction: column;
+        height: 50%;
+        width: 100%;
+
+        .player-name {
+          color: $highlight-color;
+          font-size: 2vmin;
+          margin: 0.75vmin 0;
+        }
+
+        .player-health {
+          border: 1px solid $panel-overlay-background-color;
+          border-radius: 50%;
+          font-size: 8vmin;
+          padding: 0 5vmin;
+        }
+      }
+
+      .opponent-data {
+        border-bottom: 3px solid $panel-overlay-background-color;
+        justify-content: flex-start;
+      }
+
+      .user-data {justify-content: flex-end;}
     }
 
     .right {
@@ -743,12 +780,26 @@ $border-radius: 4px;
         display: flex;
         height: 100%;
 
+        &:first-of-type {border-top-right-radius: $border-radius;}
+
         &:last-of-type {border-bottom: none;}
       }
 
       .opponent-in-play {background-color: #221414;}
 
       .user-in-play {background-color: #141422;}
+    }
+  }
+
+  .game-status {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+
+    .nav-button {
+      @include flex-center;
+      margin-right: 3vmin;
+      padding: 0.5vmin 3vmin;
     }
   }
 }

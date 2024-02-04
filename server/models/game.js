@@ -17,7 +17,7 @@ const playerSchema = new Schema ({
     ref: 'User'
   },
   deck: {
-    type: [Schema.Types.OjbectId],
+    type: [Schema.Types.ObjectId],
     ref: 'Card'
   },
   health: {

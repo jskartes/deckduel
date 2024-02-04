@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import * as usersAPI from '../utilities/usersAPI';
 import * as gamesAPI from '../utilities/gamesAPI';
 
-const UserGames = ({ nav }) => {
+const UserGames = ({ nav, setGame }) => {
   const [onlineUsers, setOnlineUsers] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getAllUsers = async () => {
@@ -17,7 +19,8 @@ const UserGames = ({ nav }) => {
 
   const handleCreateGame = async withUser => {
     const game = await gamesAPI.createGame(withUser);
-    console.log(game);
+    setGame(game);
+    navigate('/game');
   }
 
   return (

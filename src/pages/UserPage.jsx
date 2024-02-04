@@ -11,7 +11,7 @@ import UserGames from '../components/UserGames';
 import UserPageNav from '../components/UserPageNav';
 import UserSearch from '../components/UserSearch';
 
-const UserPage = ({ user, setUser }) => {
+const UserPage = ({ user, setUser, setGame }) => {
   const [showUserSearch, setShowUserSearch] = useState(false);
   const [activeChat, setActiveChat] = useState(null);
   const [mainContent, setMainContent] = useState('navPanels');
@@ -91,7 +91,7 @@ const UserPage = ({ user, setUser }) => {
         <CardCollection user={user} nav={nav} />}
 
         {mainContent === 'games' &&
-        <UserGames nav={nav} />}
+        <UserGames nav={nav} setGame={setGame} />}
 
         {mainContent === 'learnToPlay' &&
         <LearnToPlay nav={nav} />}
