@@ -1,11 +1,37 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Card from '../components/Card';
+import Chat from '../components/Chat';
 
 const Game = ({ game, setGame }) => {
   const [gameState, setGameState] = useState(game);
+  const [showGameChat, setShowGameChat] = useState(true);
+
+  console.log(gameState);
 
   const navigate = useNavigate();
+
+  const getCardsInZone = (player, zone) => (
+    <>
+      {gameState.players[player].zones[zone].cards.map((card, i) => (
+        <Card
+          key={i}
+          name={card.name}
+          cost={card.cost}
+          art={card.art}
+          cardType={card.cardType}
+          text={card.text}
+          strength={card.strength}
+          defense={card.defense}
+        />
+      ))}
+    </>
+  );
+
+  const toggleGameChat = () => {
+    const currentShowGameChat = showGameChat;
+    setShowGameChat(!currentShowGameChat);
+  }
 
   const handleEndGame = () => {
     setGame(null);
@@ -17,12 +43,21 @@ const Game = ({ game, setGame }) => {
       <div className='game-window'>
         <div className='left'>
           <div className='opponent-data'>
-            <span className='player-name'>
-              {gameState.players[1].player.username}
-            </span>
-            <span className='player-health'>
-              {gameState.players[1].health}
-            </span>
+            <div className='data-outer'>
+              <div className='data-outer-left'>
+                <span className='deck-size'>
+                  {gameState.players[1].zones[0].cards.length}
+                </span>
+              </div>
+              <div className='data-outer-right'>
+                <span className='player-name'>
+                  {gameState.players[1].player.username}
+                </span>
+                <span className='player-health'>
+                  {gameState.players[1].health}
+                </span>
+              </div>
+            </div>
             <div className='opponent-discard'>
               <span>Discard Pile</span>
             </div>
@@ -32,42 +67,43 @@ const Game = ({ game, setGame }) => {
             <div className='user-discard'>
               <span>Discard Pile</span>
             </div>
-            <span className='player-health'>
-              {gameState.players[0].health}
-            </span>
-            <span className='player-name'>
-              {gameState.players[0].player.username}
-            </span>
+            <div className='data-outer'>
+              <div className='data-outer-left'>
+                <span className='deck-size'>
+                  {gameState.players[0].zones[0].cards.length}
+                </span>
+              </div>
+              <div className='data-outer-right'>
+                <span className='player-health'>
+                  {gameState.players[0].health}
+                </span>
+                <span className='player-name'>
+                  {gameState.players[0].player.username}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
 
         <div className='right'>
-          <div className='opponent-in-play'></div>
+          <div className='opponent-in-play'>
+            {!showGameChat &&
+            <>
+              <img className='mana-pool' src='/image-assets/mana_pool.png' />
+              <span className='mana-remaining'>0</span>
+            </>}
+          </div>
           
-          <div className='user-in-play'></div>
+          <div className='user-in-play'>
+            {!showGameChat &&
+            <>
+              <img className='mana-pool' src='/image-assets/mana_pool.png' />
+              <span className='mana-remaining'>0</span>
+            </>}
+          </div>
           
           <div className='user-hand'>
-            <Card
-              name='Mana'
-              art='/card-art/mana.jpeg'
-              cardType='Resource'
-              text='Increases your available mana by 1 mana'
-            />
-            <Card
-              name='Goblin Grunt'
-              cost='1'
-              art='/card-art/goblin_grunt.jpeg'
-              cardType='Monster'
-              strength='1'
-              defense='1'
-            />
-            <Card
-              name='Lightning Bolt'
-              cost='3'
-              art='/card-art/lightning_bolt.jpeg'
-              cardType='Spell'
-              text='Deals 3 damage to any target'
-            />
+            {getCardsInZone(0, 1)}
           </div>
         </div>
       </div>
@@ -76,7 +112,14 @@ const Game = ({ game, setGame }) => {
         <span className='nav-button' onClick={handleEndGame}>
           End Game
         </span>
+        <span className='nav-button' onClick={toggleGameChat}>
+          {showGameChat ? 'Close' : 'Open'} Chat
+        </span>
       </div>
+
+      {showGameChat &&
+      // <Chat />}
+      <div className='game-chat'></div>}
     </div>
   );
 }

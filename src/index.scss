@@ -727,6 +727,7 @@ $border-radius: 4px;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 6vmin;
   padding: 10px;
+  position: relative;
   row-gap: 10px;
 
   > div {@include panel;}
@@ -749,18 +750,45 @@ $border-radius: 4px;
         height: 50%;
         width: 100%;
 
-        .player-name {
-          color: $highlight-color;
-          font-size: 2vmin;
-          margin: 0.75vmin 0;
-        }
+        .data-outer {
+          display: flex;
+          width: 100%;
 
-        .player-health {
-          border: 1px solid $panel-overlay-background-color;
-          border-radius: 50%;
-          font-size: 6vmin;
-          text-align: center;
-          width: 60%;
+          .data-outer-left {
+            @include flex-center;
+            width: 30%;
+
+            .deck-size {
+              @include flex-center;
+              border: 1px solid $font-color;
+              border-radius: $border-radius;
+              box-shadow: 4px 4px 2px $font-color;
+              font-size: 2.5vmin;
+              height: 5.5vmin;
+              width: 4vmin;
+            }
+          }
+
+          .data-outer-right {
+            @include flex-center;
+            display: flex;
+            flex-direction: column;
+            width: 70%;
+
+            .player-name {
+              color: $highlight-color;
+              font-size: 2vmin;
+              margin: 0.75vmin 0;
+            }
+    
+            .player-health {
+              border: 1px solid $panel-overlay-background-color;
+              border-radius: 50%;
+              font-size: 5.5vmin;
+              text-align: center;
+              width: 75%;
+            }
+          }          
         }
 
         .opponent-discard, .user-discard {
@@ -797,27 +825,64 @@ $border-radius: 4px;
         border-bottom: 1px solid $panel-overlay-background-color;
         display: flex;
         height: 100%;
+        position: relative;
 
         &:first-of-type {border-top-right-radius: $border-radius;}
 
         &:last-of-type {border-bottom: none;}
+
+        .mana-pool {
+          height: 11vmin;
+          opacity: 0.35;
+          position: absolute;
+          right: 0;
+        }
+
+        .mana-remaining {
+          color: $highlight-color;
+          font-size: 4vmin;
+          position: absolute;
+          right: 4vmin;
+        }
       }
 
-      .opponent-in-play {background-color: #221414;}
+      .opponent-in-play {
+        background-color: #221414;
+        
+        .mana-pool {bottom: 1vmin;}
 
-      .user-in-play {background-color: #141422;}
+        .mana-remaining {bottom: 4vmin;}
+      }
+
+      .user-in-play {
+        background-color: #141422;
+
+        .mana-pool {top: 1vmin;}
+
+        .mana-remaining {top: 4vmin;}
+      }
     }
   }
 
   .game-status {
     align-items: center;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
 
     .nav-button {
       @include flex-center;
-      margin-right: 3vmin;
+      margin: 3vmin;
       padding: 0.5vmin 3vmin;
     }
+  }
+
+  .game-chat {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: $border-radius;
+    bottom: calc(6vmin + 20px);
+    position: absolute;
+    right: 10px;
+    height: calc(100vh - (6vmin + 30px));
+    width: 40vmin;
   }
 }
