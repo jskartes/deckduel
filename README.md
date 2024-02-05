@@ -1,4 +1,4 @@
-![Screenshot 2024-02-04 at 9.49.40 PM.png](/Users/jsk/Desktop/Screenshot%202024-02-04%20at%209.49.40 PM.png)
+![logo.png](/image-assets/logo.png)
 
 **DeckDuel** is a digital client for a fictitious, ChatGPT-and-DALL·E-authored "trading card game." The decision to embark upon designing this app came from the desire to digitalize a TCG concept that I'd worked on in the past with a friend of mine. Needing to incorporate a game with *much less* complexity of rules for my first foray into designing a digital TCG web client, I turned to the mega-brain of AI to provide me with just such a "game."
 
