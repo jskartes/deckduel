@@ -6,11 +6,11 @@
 
 At present, the "gamelet" offered by **DeckDuel** is meant to be a fun play experience, as simple as it may be, and I may continue to allow the game to exist even when I do move on to incorporate more complex games based on real IP currently in development.
 
-![Screenshot 2024-02-04 at 9.46.57 PM.png](/Users/jsk/Desktop/Screenshot%202024-02-04%20at%209.46.57 PM.png)
+![user_page.png](/public/image-assets/user_page.png)
 
-![Screenshot 2024-02-04 at 9.47.23 PM.png](/Users/jsk/Desktop/Screenshot%202024-02-04%20at%209.47.23 PM.png)
+![card_collection.png](/public/image-assets/card_collection.png)
 
-![Screenshot 2024-02-04 at 9.48.02 PM.png](/Users/jsk/Desktop/Screenshot%202024-02-04%20at%209.48.02 PM.png)
+![gameplay.png](/public/image-assets/gameplay.png)
 
 ## Technologies Used
 
